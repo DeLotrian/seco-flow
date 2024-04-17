@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, MouseEvent } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import ReactFlow, {
   ReactFlowProvider,
@@ -7,13 +7,22 @@ import ReactFlow, {
   useEdgesState,
   Controls,
   Background,
+  useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import "../../App.css";
 
-import ProductOwnerComponent from "../flowComponents/ProductOwnerComponent";
+import RectangleComponent from "../flowComponents/ProductOwnerComponent";
+import GroupComponent from "../flowComponents/GroupComponent";
 const nodeTypes = {
-  productOwner: ProductOwnerComponent,
+  developer: RectangleComponent,
+  techLead: RectangleComponent,
+  teamLead: RectangleComponent,
+  tester: RectangleComponent,
+  devOps: RectangleComponent,
+  projectManager: RectangleComponent,
+  productOwner: RectangleComponent,
+  groupComponent: GroupComponent,
 };
 
 let id = 0;
@@ -24,14 +33,60 @@ const FlowArea = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { getIntersectingNodes } = useReactFlow();
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   }, []);
 
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
+  );
+
+  const onNodeDrag = useCallback((_, node) => {
+    const intersections = getIntersectingNodes(node).map((n) => n.id);
+    if (intersections.length > 0) {
+      //console.log(intersections);
+
+      setNodes((ns) =>
+        ns.map((n) => {
+          if (node.id === n.id) {
+            n.data.readyToGroup = true;
+            n.data.possibleParentId = intersections[0];
+          }
+          return n;
+        })
+      );
+    } else {
+      setNodes((ns) =>
+        ns.map((n) => {
+          if (node.id === n.id) {
+            n.data.readyToGroup = false;
+            n.data.possibleParentId = null;
+          }
+          return n;
+        })
+      );
+    }
+  }, []);
+
   const deleteNode = (id) => {
     setNodes((nds) => nds.filter((node) => node.id !== id));
+  };
+
+  const groupNode = (nodeId, parentId) => {
+    setNodes((ns) =>
+      ns.map((n) => {
+        if (nodeId === n.id) {
+          n.parentId = parentId;
+          n.extent = "parent";
+          n.data.isGrouped = true;
+        }
+        return n;
+      })
+    );
   };
 
   const onDrop = useCallback(
@@ -53,11 +108,14 @@ const FlowArea = () => {
         type,
         position,
         data: {
-          label: `${type} node`,
+          label: type,
           id: newId,
           actions: {
             delete: () => {
               deleteNode(newId);
+            },
+            group: (parentId) => {
+              groupNode(newId, parentId);
             },
           },
         },
@@ -79,6 +137,8 @@ const FlowArea = () => {
               nodeTypes={nodeTypes}
               onNodesChange={onNodesChange}
               onEdgesChange={onEdgesChange}
+              onNodeDrag={onNodeDrag}
+              onConnect={onConnect}
               onInit={setReactFlowInstance}
               onDrop={onDrop}
               onDragOver={onDragOver}

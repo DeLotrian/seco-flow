@@ -2,15 +2,15 @@ import React from "react";
 import { NodeResizer, Handle, Position, NodeToolbar } from "reactflow";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faObjectGroup } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const CustomNodeComponent = ({ data, selected }) => {
   return (
     <>
       <NodeResizer
         isVisible={selected}
-        minWidth={150}
-        minHeight={50}
+        minWidth={200}
+        minHeight={250}
         color="#ff0071"
       />
       <NodeToolbar isVisible={selected} position={Position.Top}>
@@ -23,19 +23,6 @@ const CustomNodeComponent = ({ data, selected }) => {
             }}
           >
             <FontAwesomeIcon icon={faXmark} />
-          </Button>
-          <Button
-            size="sm"
-            variant="primary"
-            style={{
-              display: data.readyToGroup ? "inline-block" : "none",
-              marginLeft: "5px",
-            }}
-            onClick={() => {
-              data.actions.group(data.possibleParentId);
-            }}
-          >
-            <FontAwesomeIcon icon={faObjectGroup} />
           </Button>
         </div>
       </NodeToolbar>

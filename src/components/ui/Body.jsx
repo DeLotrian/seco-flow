@@ -1,6 +1,6 @@
 import { Row, Col, Container } from "react-bootstrap";
 import ComponentsKit from "./ComponentsKit2";
-import FlowArea from "./FlowArea";
+import FlowProvider from "./FlowProvider";
 import "../../App.css";
 const Header = () => {
   return (
@@ -12,7 +12,7 @@ const Header = () => {
       </Row>
       <Row>
         <Col>
-          <FlowArea />
+          <FlowProvider />
         </Col>
       </Row>
     </Container>

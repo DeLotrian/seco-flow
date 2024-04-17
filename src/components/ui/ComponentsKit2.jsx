@@ -21,27 +21,53 @@ const ComponentsKit = () => {
         <Col className="d-flex justify-content-center">
           <ButtonGroup className="compKit">
             <Dropdown as={ButtonGroup}>
-              <Dropdown.Toggle variant="light" id="dropdown-basic">
+              <Dropdown.Toggle
+                variant="light"
+                id="dropdown-basic"
+                onDragStart={(event) => onDragStart(event, "group")}
+                draggable
+              >
                 Розробник
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item
                   eventKey="1"
-                  onDragStart={(event) => onDragStart(event, "input")}
+                  onDragStart={(event) => onDragStart(event, "teamLead")}
                   draggable
                 >
                   Керівник команди
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="2">Тех лідер</Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="2"
+                  onDragStart={(event) => onDragStart(event, "techLead")}
+                  draggable
+                >
+                  Тех лідер
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Button variant="light" as={ButtonGroup}>
+            <Button
+              variant="light"
+              as={ButtonGroup}
+              onDragStart={(event) => onDragStart(event, "tester")}
+              draggable
+            >
               Тестувальник
             </Button>
-            <Button variant="light" as={ButtonGroup}>
+            <Button
+              variant="light"
+              as={ButtonGroup}
+              onDragStart={(event) => onDragStart(event, "devOps")}
+              draggable
+            >
               DevOps
             </Button>
-            <Button variant="light" as={ButtonGroup}>
+            <Button
+              variant="light"
+              as={ButtonGroup}
+              onDragStart={(event) => onDragStart(event, "projectManager")}
+              draggable
+            >
               Керівник проєкту
             </Button>
             <Button
@@ -51,6 +77,14 @@ const ComponentsKit = () => {
               draggable
             >
               Власник продукту
+            </Button>
+            <Button
+              variant="light"
+              as={ButtonGroup}
+              onDragStart={(event) => onDragStart(event, "groupComponent")}
+              draggable
+            >
+              Група
             </Button>
           </ButtonGroup>
         </Col>
