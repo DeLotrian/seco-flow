@@ -1,0 +1,53 @@
+.App {
+  background-color: #f7f7f9;
+  width: 100%;
+  height: 100vh;
+}
+
+.pageHeader {
+  background-color: #1c1f33;
+  color: #f7f7f9;
+  height: 64px;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.pageBody {
+}
+
+.compKit {
+  border-color: #1c1f33;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.compKit img {
+  width: 100px;
+}
+
+.flowArea {
+  height: 700px;
+  border-color: #1c1f33;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.flowArea .rectangleComponent {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: #1c1f33;
+  border-style: solid;
+
+  background-color: white;
+
+  min-width: 150px;
+  min-height: 50px;
+  height: 100%;
+  width: 100%;
+  padding: 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
