@@ -12,17 +12,21 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import "../../App.css";
 
-import RectangleComponent from "../flowComponents/ProductOwnerComponent";
+import RoleComponent from "../flowComponents/RoleComponent";
+import ThingComponent from "../flowComponents/ThingComponent";
 import GroupComponent from "../flowComponents/GroupComponent";
 const nodeTypes = {
-  developer: RectangleComponent,
-  techLead: RectangleComponent,
-  teamLead: RectangleComponent,
-  tester: RectangleComponent,
-  devOps: RectangleComponent,
-  projectManager: RectangleComponent,
-  productOwner: RectangleComponent,
+  developer: RoleComponent,
+  techLead: RoleComponent,
+  teamLead: RoleComponent,
+  tester: RoleComponent,
+  devOps: RoleComponent,
+  projectManager: RoleComponent,
+  productOwner: RoleComponent,
   groupComponent: GroupComponent,
+  tool: ThingComponent,
+  task: ThingComponent,
+  project: ThingComponent,
 };
 
 let id = 0;
@@ -118,7 +122,11 @@ const FlowArea = () => {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
-      const type = event.dataTransfer.getData("application/reactflow");
+      const data = JSON.parse(
+        event.dataTransfer.getData("application/reactflow")
+      );
+      const type = data.nodeType;
+      const color = data.color;
       if (typeof type === "undefined" || !type) {
         return;
       }
@@ -136,6 +144,7 @@ const FlowArea = () => {
         data: {
           label: type,
           id: newId,
+          color: color,
           actions: {
             delete: () => {
               deleteNode(newId);

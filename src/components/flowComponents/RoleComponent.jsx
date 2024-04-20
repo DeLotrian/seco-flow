@@ -8,7 +8,7 @@ import {
   faObjectUngroup,
 } from "@fortawesome/free-solid-svg-icons";
 
-const CustomNodeComponent = ({ data, selected }) => {
+const RoleComponent = ({ data, selected }) => {
   return (
     <>
       <NodeResizer
@@ -86,7 +86,10 @@ const CustomNodeComponent = ({ data, selected }) => {
         style={{ background: "#555" }}
         onConnect={(params) => console.log("handle onConnect", params)}
       />
-      <div className="rectangleComponent">
+      <div
+        className="rectangleComponent"
+        style={{ backgroundColor: data.color }}
+      >
         <div>
           <strong>{data.label}</strong>
         </div>
@@ -95,4 +98,4 @@ const CustomNodeComponent = ({ data, selected }) => {
   );
 };
 
-export default CustomNodeComponent;
+export default RoleComponent;

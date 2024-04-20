@@ -39,10 +39,27 @@
   border-color: #1c1f33;
   border-style: solid;
 
-  background-color: white;
-
   min-width: 150px;
   min-height: 50px;
+  height: 100%;
+  width: 100%;
+  padding: 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flowArea .thingComponent {
+  border-radius: 0.1rem;
+  border-width: 1px;
+  border-color: #1c1f33;
+  border-style: solid;
+
+  background-color: white;
+
+  min-width: 80px;
+  min-height: 40px;
   height: 100%;
   width: 100%;
   padding: 0.3rem;
@@ -58,7 +75,7 @@
   border-color: #1c1f33;
   border-style: solid;
 
-  background-color: rgba(255, 195, 195, 0.452);
+  background-color: #ffc3c373;
 
   min-width: 200px;
   min-height: 150px;
