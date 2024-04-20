@@ -73,6 +73,10 @@ const FlowArea = () => {
   }, []);
 
   const deleteNode = (id) => {
+    console.log(reactFlowInstance.getNodes());
+    if (reactFlowInstance.getNode(id)?.data.isParent) {
+      setNodes((nds) => nds.filter((node) => node.data.parentId !== id));
+    }
     setNodes((nds) => nds.filter((node) => node.id !== id));
   };
 
@@ -80,9 +84,31 @@ const FlowArea = () => {
     setNodes((ns) =>
       ns.map((n) => {
         if (nodeId === n.id) {
+          n.position.x = 10;
+          n.position.y = 50;
           n.parentId = parentId;
           n.extent = "parent";
           n.data.isGrouped = true;
+          n.data.parentId = parentId;
+        } else if (parentId === n.id) {
+          n.data.isParent = true;
+        }
+        return n;
+      })
+    );
+  };
+
+  const ungroupNode = (nodeId) => {
+    setNodes((ns) =>
+      ns.map((n) => {
+        if (nodeId === n.id) {
+          const parentNode = reactFlowInstance.getNode(n.parentId);
+          n.position.x = parentNode.width + parentNode.position.x;
+          n.position.y = parentNode.height + parentNode.position.y;
+          n.parentId = null;
+          n.extent = "";
+          n.data.isGrouped = false;
+          n.data.parentId = null;
         }
         return n;
       })
@@ -116,6 +142,9 @@ const FlowArea = () => {
             },
             group: (parentId) => {
               groupNode(newId, parentId);
+            },
+            ungroup: () => {
+              ungroupNode(newId);
             },
           },
         },

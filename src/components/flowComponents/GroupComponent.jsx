@@ -10,7 +10,7 @@ const CustomNodeComponent = ({ data, selected }) => {
       <NodeResizer
         isVisible={selected}
         minWidth={200}
-        minHeight={250}
+        minHeight={150}
         color="#ff0071"
       />
       <NodeToolbar isVisible={selected} position={Position.Top}>
@@ -55,7 +55,7 @@ const CustomNodeComponent = ({ data, selected }) => {
         style={{ background: "#555" }}
         onConnect={(params) => console.log("handle onConnect", params)}
       />
-      <div className="rectangleComponent">
+      <div className="groupComponent">
         <div>
           <strong>{data.label}</strong>
         </div>

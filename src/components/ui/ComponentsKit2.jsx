@@ -24,7 +24,7 @@ const ComponentsKit = () => {
               <Dropdown.Toggle
                 variant="light"
                 id="dropdown-basic"
-                onDragStart={(event) => onDragStart(event, "group")}
+                onDragStart={(event) => onDragStart(event, "developer")}
                 draggable
               >
                 Розробник

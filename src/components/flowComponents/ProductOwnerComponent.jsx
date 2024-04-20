@@ -2,7 +2,11 @@ import React from "react";
 import { NodeResizer, Handle, Position, NodeToolbar } from "reactflow";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faObjectGroup } from "@fortawesome/free-solid-svg-icons";
+import {
+  faXmark,
+  faObjectGroup,
+  faObjectUngroup,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CustomNodeComponent = ({ data, selected }) => {
   return (
@@ -28,7 +32,8 @@ const CustomNodeComponent = ({ data, selected }) => {
             size="sm"
             variant="primary"
             style={{
-              display: data.readyToGroup ? "inline-block" : "none",
+              display:
+                data.readyToGroup && !data.isGrouped ? "inline-block" : "none",
               marginLeft: "5px",
             }}
             onClick={() => {
@@ -36,6 +41,19 @@ const CustomNodeComponent = ({ data, selected }) => {
             }}
           >
             <FontAwesomeIcon icon={faObjectGroup} />
+          </Button>
+          <Button
+            size="sm"
+            variant="warning"
+            style={{
+              display: data.isGrouped ? "inline-block" : "none",
+              marginLeft: "5px",
+            }}
+            onClick={() => {
+              data.actions.ungroup();
+            }}
+          >
+            <FontAwesomeIcon icon={faObjectUngroup} />
           </Button>
         </div>
       </NodeToolbar>

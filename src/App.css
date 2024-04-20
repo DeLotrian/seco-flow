@@ -52,6 +52,25 @@
   align-items: center;
 }
 
+.flowArea .groupComponent {
+  border-radius: 0.3rem;
+  border-width: 1px;
+  border-color: #1c1f33;
+  border-style: solid;
+
+  background-color: rgba(255, 195, 195, 0.452);
+
+  min-width: 200px;
+  min-height: 150px;
+  height: 100%;
+  width: 100%;
+  padding: 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
 .react-flow__node.highlight {
   background-color: #ff0072;
   color: white;
