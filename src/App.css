@@ -2,6 +2,7 @@
   background-color: #f7f7f9;
   width: 100%;
   height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .pageHeader {
@@ -31,6 +32,7 @@
   border-style: solid;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  margin-left: 0.8rem;
 }
 
 .flowArea .rectangleComponent {
@@ -112,4 +114,23 @@
 
 .intersection-flow .react-flow__handle {
   display: none;
+}
+
+.sideBar {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  width: 400px !important;
+  background-color: white;
+  height: 700px;
+  border-color: #1c1f33;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.5rem;
+}
+
+.sideBar .header {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

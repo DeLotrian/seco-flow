@@ -159,7 +159,13 @@ const FlowArea = () => {
         },
       };
 
-      setNodes((nds) => nds.concat(newNode));
+      setNodes((nds) => {
+        if (newNode.type === "groupComponent") {
+          return [newNode, ...nds]; // Prepend the new group node
+        } else {
+          return [...nds, newNode]; // Append the new node
+        }
+      });
     },
     [reactFlowInstance]
   );

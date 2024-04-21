@@ -1,5 +1,6 @@
 import { Row, Col, Container } from "react-bootstrap";
 import ComponentsKit from "./ComponentsKit";
+import SideBar from "./SideBar";
 import FlowProvider from "./FlowProvider";
 import "../../App.css";
 const Header = () => {
@@ -11,7 +12,8 @@ const Header = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col className="d-flex">
+          <SideBar />
           <FlowProvider />
         </Col>
       </Row>
