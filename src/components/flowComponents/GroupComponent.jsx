@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { NodeResizer, Handle, Position, NodeToolbar } from "reactflow";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const CustomNodeComponent = ({ data, selected }) => {
+  const nameAttribute = useMemo(() => {
+    return data.attributes.find((attr) => attr.name === "name")?.value;
+  }, [data.attributes]);
   return (
     <>
       <NodeResizer
@@ -57,7 +60,7 @@ const CustomNodeComponent = ({ data, selected }) => {
       />
       <div className="groupComponent">
         <div>
-          <strong>{data.label}</strong>
+          <strong>{nameAttribute}</strong>
         </div>
       </div>
     </>

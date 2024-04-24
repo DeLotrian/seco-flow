@@ -35,7 +35,7 @@ const SideBar = () => {
   };
 
   return (
-    <Container className="mt-2 sideBar">
+    <Container fluid className="mt-2 sideBar">
       <Row className="justify-content-between">
         <Col className="header">
           <h4>Атрибути</h4>

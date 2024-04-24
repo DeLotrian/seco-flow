@@ -19,6 +19,7 @@ import {
 import RoleComponent from "../flowComponents/RoleComponent";
 import ThingComponent from "../flowComponents/ThingComponent";
 import GroupComponent from "../flowComponents/GroupComponent";
+import DefaultEdge from "../flowComponents/DefaultEdge";
 const nodeTypes = {
   developer: RoleComponent,
   techLead: RoleComponent,
@@ -33,8 +34,14 @@ const nodeTypes = {
   project: ThingComponent,
 };
 
-let id = 0;
+const edgeTypes = {
+  "default-edge": DefaultEdge,
+};
+
+let id = 0,
+  edgeId = 0;
 const getId = () => `dndnode_${id++}`;
+const getEdgeId = () => `dndedge_${edgeId++}`;
 
 const FlowArea = () => {
   const reactFlowWrapper = useRef(null);
@@ -56,8 +63,23 @@ const FlowArea = () => {
   }, []);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    []
+    (connection) => {
+      const edge = {
+        ...connection,
+        id: getEdgeId(),
+        type: "default-edge",
+        data: {
+          id: id,
+          actions: {
+            delete: () => {
+              setEdges((es) => es.filter((e) => e.data.id !== id));
+            },
+          },
+        },
+      };
+      setEdges((eds) => addEdge(edge, eds));
+    },
+    [setEdges]
   );
 
   const onNodeDrag = useCallback((_, node) => {
@@ -195,29 +217,26 @@ const FlowArea = () => {
 
   return (
     <ReactFlowProvider>
-      <Container fluid className="pageBody px-0 mt-2">
-        <Row>
-          <Col>
-            <div className="flowArea" ref={reactFlowWrapper}>
-              <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                nodeTypes={nodeTypes}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onNodeDrag={onNodeDrag}
-                onConnect={onConnect}
-                onInit={setReactFlowInstance}
-                onDrop={onDrop}
-                onDragOver={onDragOver}
-                fitView
-              >
-                <Background />
-                <Controls />
-              </ReactFlow>
-            </div>
-          </Col>
-        </Row>
+      <Container fluid className="px-0 mt-2 flowWrapper">
+        <div className="flowArea" ref={reactFlowWrapper}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onNodeDrag={onNodeDrag}
+            onConnect={onConnect}
+            onInit={setReactFlowInstance}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+            fitView
+          >
+            <Background />
+            <Controls />
+          </ReactFlow>
+        </div>
       </Container>
     </ReactFlowProvider>
   );

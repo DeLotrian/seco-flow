@@ -9,16 +9,14 @@ import { ReactFlowProvider } from "../context/reactFlowContext"; // Импорт
 const Header = () => {
   return (
     <ReactFlowProvider>
-      {" "}
-      {/* Обертываем всю структуру в ваш провайдер контекста */}
       <Container fluid className="pageBody px-0">
-        <Row>
+        <Row className="h-15">
           <Col>
             <ComponentsKit />
           </Col>
         </Row>
-        <Row>
-          <Col className="d-flex">
+        <Row className="h-85">
+          <Col className="d-flex h-100">
             <SideBar />
             <FlowProvider />
           </Col>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { NodeResizer, Handle, Position, NodeToolbar } from "reactflow";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const ThingComponent = ({ data, selected }) => {
+  const nameAttribute = useMemo(() => {
+    return data.attributes.find((attr) => attr.name === "name")?.value;
+  }, [data.attributes]);
   return (
     <>
       <NodeResizer
@@ -71,7 +74,7 @@ const ThingComponent = ({ data, selected }) => {
       />
       <div className="thingComponent" style={{ backgroundColor: data.color }}>
         <div>
-          <strong>{data.label}</strong>
+          <strong>{nameAttribute}</strong>
         </div>
       </div>
     </>

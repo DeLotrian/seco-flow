@@ -5,6 +5,14 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.h-15 {
+  height: 15%; /* 20% of the viewport height */
+}
+
+.h-85 {
+  height: 85%; /* 80% of the viewport height */
+}
+
 .pageHeader {
   background-color: #1c1f33;
   color: #f7f7f9;
@@ -13,6 +21,12 @@
 }
 
 .pageBody {
+  height: calc(100vh - 64px);
+}
+
+.workingArea {
+  display: flex;
+  height: 100%;
 }
 
 .compKit {
@@ -21,12 +35,12 @@
   border-style: solid;
 }
 
-.compKit img {
-  width: 100px;
+.flowWrapper {
+  height: 95%;
 }
 
 .flowArea {
-  height: 700px;
+  height: 100%;
   border-color: #1c1f33;
   border-width: 1px;
   border-style: solid;
@@ -121,11 +135,11 @@
   padding-right: 0.2rem;
   width: 400px !important;
   background-color: white;
-  height: 700px;
   border-color: #1c1f33;
   border-width: 1px;
   border-style: solid;
   border-radius: 0.5rem;
+  height: 95%;
 }
 
 .sideBar .header {
