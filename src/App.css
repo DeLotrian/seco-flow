@@ -126,6 +126,11 @@
   background-color: #eee;
 }
 
+button.react-flow__controls-button {
+  width: 32px;
+  height: 32px;
+}
+
 .intersection-flow .react-flow__handle {
   display: none;
 }
