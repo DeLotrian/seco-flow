@@ -69,15 +69,21 @@ const FlowArea = () => {
 
   const onConnect = useCallback(
     (connection) => {
+      const newId = getEdgeId();
       const edge = {
         ...connection,
-        id: getEdgeId(),
+        id: newId,
         type: "default-edge",
         data: {
-          id: id,
+          id: newId,
           actions: {
             delete: () => {
-              setEdges((es) => es.filter((e) => e.data.id !== id));
+              setEdges((es) =>
+                es.filter((e) => {
+                  console.log(e);
+                  return e.id !== newId;
+                })
+              );
             },
           },
         },

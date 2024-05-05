@@ -73,15 +73,6 @@ const ComponentsKit = () => {
             <Button
               variant="light"
               as={ButtonGroup}
-              onDragStart={(event) => onDragStart(event, "devOps", "#E9B384")}
-              style={{ backgroundColor: "#E9B384" }}
-              draggable
-            >
-              DevOps
-            </Button>
-            <Button
-              variant="light"
-              as={ButtonGroup}
               onDragStart={(event) =>
                 onDragStart(event, "projectManager", "#F4F2DE")
               }
