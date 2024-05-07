@@ -21,6 +21,8 @@ import {
   useReactFlowContext,
 } from "../context/reactFlowContext";
 
+import getInitialAttributes from "../helpers/nodeAttributesHelper";
+
 import RoleComponent from "../flowComponents/RoleComponent";
 import ThingComponent from "../flowComponents/ThingComponent";
 import GroupComponent from "../flowComponents/GroupComponent";
@@ -189,18 +191,7 @@ const FlowArea = () => {
           label: type,
           id: newId,
           color: color,
-          attributes: [
-            {
-              text: "Тип",
-              name: "type",
-              value: type,
-            },
-            {
-              text: "Назва",
-              name: "name",
-              value: type,
-            },
-          ],
+          attributes: getInitialAttributes(type),
           actions: {
             delete: () => {
               deleteNode(newId);

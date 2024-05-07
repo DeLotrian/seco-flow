@@ -8,21 +8,19 @@ import { ReactFlowProvider } from "../context/reactFlowContext"; // Импорт
 
 const Header = () => {
   return (
-    <ReactFlowProvider>
-      <Container fluid className="pageBody px-0">
-        <Row className="h-15">
-          <Col>
-            <ComponentsKit />
-          </Col>
-        </Row>
-        <Row className="h-85">
-          <Col className="d-flex h-100">
-            <SideBar />
-            <FlowProvider />
-          </Col>
-        </Row>
-      </Container>
-    </ReactFlowProvider>
+    <Container fluid className="pageBody px-0">
+      <Row className="h-15">
+        <Col>
+          <ComponentsKit />
+        </Col>
+      </Row>
+      <Row className="h-85">
+        <Col className="d-flex h-100">
+          <SideBar />
+          <FlowProvider />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
